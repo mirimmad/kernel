@@ -7,10 +7,14 @@ void screen_init () {
 	currLine = 0;
 }
  
+
+
 void print (char *s) {
 	// MAX_ROWS = 25 ; MAX_COLS = 80
 	// if we are past the last line, SCROLL
-	if (currLine == MAX_ROWS && (nextTextPos % (MAX_COLS * 2) == 0)) {
+	
+	 if (currLine == MAX_ROWS  &&  (nextTextPos % (MAX_COLS * 2) == 0)) {
+	/*	// TODO: make scroll work AGAIN
 		for (int i = 0; i < MAX_ROWS; i++) {
 			for (int j = 0; j < MAX_COLS * 2; j = j + 2) {
 				// Put in a row 'i' what is in row 'i+1'
@@ -18,10 +22,11 @@ void print (char *s) {
 				// Background
 				* (video_memory + (i * MAX_COLS * 2) + (j+1)) = 15;
 			}
-		}
-		nextTextPos -= 160;
-		currLine -= 1;
-
+		} 
+		*/
+		//nextTextPos -= 160;
+		//currLine  -= 1;
+		
 	}
 
 	while (*s != '\0') {
@@ -30,6 +35,8 @@ void print (char *s) {
 		nextTextPos += 2;
 		s++;
 	}
+
+
 }
 
 void println() {
@@ -38,6 +45,7 @@ void println() {
 
 void printi(int n)
 {
+	
 	char* d2s[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 	if (n >= 0 && n <= 9)
 		print(d2s[n]);
@@ -48,4 +56,5 @@ void printi(int n)
 		printi(d);
 		printi(r);
 	}
+
 }

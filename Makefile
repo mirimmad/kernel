@@ -13,7 +13,9 @@ build: $(BOOT) $(KERNEL)
 	$(CC) $(KERNEL_FLAGS) driver/screen.c -o screen.elf
 	$(CC) $(KERNEL_FLAGS) driver/timer.c -o timer.elf
 	$(CC) $(KERNEL_FLAGS) common.c -o common.elf
-	ld -melf_i386 -Tlinker.ld start.o kernel.elf screen.elf timer.elf common.elf -o mykernel.elf
+	$(CC) $(KERNEL_FLAGS) process.c -o process.elf
+	$(CC) $(KERNEL_FLAGS) scheduler.c -o scheduler.elf
+	ld -melf_i386 -Tlinker.ld start.o kernel.elf screen.elf timer.elf common.elf process.elf scheduler.elf -o mykernel.elf
 	objcopy -O binary mykernel.elf kernel.bin
 	dd if=boot.o of=kernel.img
 	dd seek=1 conv=sync if=kernel.bin of=kernel.img bs=512 count=5

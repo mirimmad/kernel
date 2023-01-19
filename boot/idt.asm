@@ -164,9 +164,21 @@ isr_31:
 
 isr_32:
 	cli
+
+	pusha ; PUSH the GPRs onto the stack
+	mov eax, [esp + 32] ; get the return address (EIP) of the "suspended" process (8 Regs * 4)
+	push eax
+	call scheduler
 	call timer_tick
-	push 32
-    jmp here
+
+	mov al, 0x20 
+    out 0x20, al ; Send EOI to PIC
+    
+    add esp, 40d
+    
+    push run_next_process
+
+    iret
 	
 isr_33:
 	cli

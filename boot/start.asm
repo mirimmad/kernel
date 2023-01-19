@@ -5,6 +5,8 @@ extern kernel_main
 extern remap_pic
 extern interrupt_handler
 extern timer_tick
+extern scheduler
+extern run_next_process
 
 start:
 	mov ax, cs
@@ -13,6 +15,7 @@ start:
 	call init_video_mode
 	call enter_protected_mode
 	call setup_interrupts
+	call load_task_register
 
 	call 08h:start_kernel ; 32-bit code is called here from the "context" of 16-bit code.
 						  ; logical memory address that refers to kernel's code should refer to the segment 
@@ -53,6 +56,11 @@ load_idt:
 	lidt [idtr - start]
 	ret
 
+load_task_register:
+	mov ax, 40d ; offest of TSS in GDT
+	ltr ax
+	ret
+
 bits 32
 
 start_kernel:
@@ -71,3 +79,6 @@ start_kernel:
 
 %include "boot/gdt.asm"
 %include "boot/idt.asm"
+
+tss:
+	dd 0
