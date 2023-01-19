@@ -1,5 +1,6 @@
 # Kernel
 `
 $ make
-$ qemu-system-i396 kernel.img
+
+$ qemu-system-i386 kernel.img
 `
