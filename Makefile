@@ -20,3 +20,6 @@ build: $(BOOT) $(KERNEL)
 	dd if=boot.o of=kernel.img
 	dd seek=1 conv=sync if=kernel.bin of=kernel.img bs=512 count=5
 	dd seek=6 conv=sync if=/dev/zero of=kernel.img bs=512 count=2046
+
+run:
+	qemu-system-x86_64 kernel.img

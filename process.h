@@ -14,9 +14,9 @@ typedef struct {
 	void * base_address;
 } process_t;
 
-process_t* process_table[15];
+static process_t* process_table[15];
 
-int process_count, curr_pid;
+static int process_count, curr_pid;
 
 void processes_init();
 

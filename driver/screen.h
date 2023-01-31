@@ -3,10 +3,10 @@
 
 #define MAX_ROWS 25
 #define MAX_COLS 80
-volatile unsigned char * video_memory;
+static volatile unsigned char * video_memory;
 
-int nextTextPos;
-int currLine;
+static int nextTextPos;
+static int currLine;
 
 void screen_init();
 void print(char *);
