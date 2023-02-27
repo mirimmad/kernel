@@ -2,7 +2,7 @@ ASM = nasm
 BOOT = boot/boot.asm
 INIT_KERNEL = boot/start.asm
 KERNEL_FILES = main.c
-KERNEL_FLAGS = -Wall -m32 -c -ffreestanding -fno-asynchronous-unwind-tables -fno-pie
+KERNEL_FLAGS = -Wall -m32 -c -ffreestanding -fno-asynchronous-unwind-tables -fno-pie -fstack-protector
 KERNEL_OBJECT = -o kernel.elf
 
 
